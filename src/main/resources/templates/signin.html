@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>sign up page</title>
+
+    <link href="../static/css/signup.css" rel="stylesheet" />
+    <script src="../static/js/signup.js"></script>
+</head>
+
+<body>
+<header>
+    <div class="top_banner">
+        <li>
+            <a href = "main.html">ㅎㄷㄷ</a>
+        </li>
+    </div>
+    <nav class="navbar">
+        <div class="menu">
+            <ul>
+                <li><a href = "main.html">Home</a></li>
+                <li><a href = "map.html">지도</a></li>
+                <li><a href = "promotion.html">홍보</a></li>
+                <li><a href = "#">구인</a>
+                    <ul class="submenu">
+                        <li><a href = "projectrecruit.html">프로젝트 구인</a></li>
+                        <li><a href = "roomrecruit.html">룸메이트 구인</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<!--header-->
+
+<form id="join_form" method="post"></form>
+<!--container-->
+<div class="container" id="container" role="main">
+    <h1 class="signup_title">회원가입</h1>
+    <div class="join_content">
+        <!---아이디--->
+        <div class="join_row">
+
+
+            <div class="join_list">
+                <label class="join_title">아이디(학번)</label>
+            </div>
+            <div class="join_field_wrap">
+                <div class="join_form">
+                    <input type="text" id="uid" name="uid" class="int" placeholder="학번을 입력하세요. 예)C123456" pattern="[abcABC]{1}\d{6}">
+                </div>
+                <div class="join_expand_field">
+                    <span class="error_next_box" id="uidMsg"  style="display:none" aria-live="assertive">오류메세지</span>
+                </div>
+            </div>
+
+            <div class="right_btn_area">
+                <button type="button" id="upload_button" class="btn_verify btn_secondary">
+                    <span>헤이영 업로드</span>
+                </button>
+            </div>
+
+
+        </div>
+        <!---비밀번호--->
+        <div class="join_row">
+            <div class="join_list">
+                <label class="join_title">비밀번호</label>
+            </div>
+            <div class="join_field_wrap">
+                <div class="join_form">
+                    <input type="text" id="pwd" name="pwd" class="int"  placeholder="비밀번호를 입력하세요.">
+                    <div class="join_expand_field">
+                        <span class="error_next_box" id="pwdMsg"  style="display:none" aria-live="assertive">오류메세지</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right_btn_area"></div>
+
+        </div>
+        <!---비밀번호 재확인--->
+        <div class="join_row">
+            <div class="join_list">
+                <label class="join_title">비밀번호 재확인</label>
+            </div>
+            <div class="join_field_wrap">
+                <div class="join_form">
+                    <input type="text" id="repwd" name="repwd" class="int" placeholder="비밀번호를 다시 입력하세요.">
+                    <div class="join_expand_field">
+                        <span class="error_next_box" id="repwdMsg"  style="display:none" aria-live="assertive">오류메세지</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="right_btn_area"></div>
+
+        </div>
+        <!---이메일--->
+        <div class="join_row">
+            <div class="join_list">
+                <label class="join_title">이메일</label>
+            </div>
+            <div class="join_field_wrap">
+                <div class="join_form">
+                    <input type="text" id="mail" name="mail" class="int" placeholder="예) abc123@g.hongik.ac.kr">
+                </div>
+                <div class="join_expand_field">
+                    <span class="error_next_box" id="mailMsg"  style="display:none" aria-live="assertive">오류메세지</span>
+                </div>
+            </div>
+
+            <div class="right_btn_area">
+                <button type="button" id="mail_btn" class="btn_verify btn_secondary">
+                    <span>인증번호 받기</span>
+                </button>
+            </div>
+
+        </div>
+        <!---인증번호--->
+        <div class="join_row">
+            <div class="join_list">
+                <label class="join_title"></label>
+            </div>
+            <div class="join_field_wrap">
+                <div class="join_form form_disable">
+                    <input type="text" id="mailnum" name="mailnum" class="int">
+                </div>
+                <div class="join_expand_field">
+                    <span class="error_next_box" id="mailnumMsg"  style="display:none" aria-live="assertive">오류메세지</span>
+                </div>
+            </div>
+            <div class="right_btn_area">
+                <button type="button" id="mailnum_btn" class="btn_verify btn_disable">
+                    <span>인증번호 입력</span>
+                </button>
+            </div>
+        </div>
+        <!---닉네임--->
+        <div class="join_row">
+            <div class="join_list">
+                <label class="join_title">닉네임</label>
+            </div>
+            <div class="join_field_wrap">
+                <div class="join_form">
+                    <input type="text" id="uname" name="uname" class="int" placeholder="닉네임을 입력하세요.">
+                    <div class="join_expand_field">
+                        <span class="error_next_box" id="unameMsg"  style="display:none" aria-live="assertive">오류메세지</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="right_btn_area">
+                <button type="button" id="duplicate_check_btn" onclick="uname_check();" class="btn_verify btn_secondary">
+                    <span>중복확인</span>
+                </button>
+            </div>
+
+        </div>
+        <!---전공--->
+        <div class="join_row">
+            <div class="join_list">
+                <label class="join_title">전공</label>
+            </div>
+            <div class="join_field_wrap">
+                <div class="major_select">
+                    <select id="major" name="major" class="sel" aria-label="전공을 선택하세요">
+                        <option value selected>전공을 선택하세요.</option>
+                        <option value="1">자율전공</option>
+                        <option value="2">건설환경공학과</option>
+                        <option value="3">전자전기공학부</option>
+                        <option value="4">컴퓨터공학과</option>
+                        <option value="5">신소재공학전공</option>
+                        <option value="6">화학공학전공</option>
+                        <option value="7">기계·시스템디자인공학과</option>
+                        <option value="8">산업데이터공학과</option>
+                        <option value="9">건축학전공</option>
+                        <option value="10">실내건축학전공</option>
+                        <option value="11">도시공학과</option>
+
+
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="right_btn_area"></div>
+
+        </div>
+        <!---복수전공--->
+        <div class="join_row">
+            <div class="join_list">
+                <label class="join_title">복수전공
+                    <span class="terms_choice">(선택)</span></label>
+            </div>
+            <div class="join_field_wrap">
+                <div class="major_select">
+                    <select id="double_major" name="double_major" class="sel" aria-label="전공을 선택하세요">
+                        <option value selected>전공을 선택하세요.</option>
+                        <option value="1">자율전공</option>
+                        <option value="2">건설환경공학과</option>
+                        <option value="3">전자전기공학부</option>
+                        <option value="4">컴퓨터공학과</option>
+                        <option value="5">신소재공학전공</option>
+                        <option value="6">화학공학전공</option>
+                        <option value="7">기계·시스템디자인공학과</option>
+                        <option value="8">산업데이터공학과</option>
+                        <option value="9">건축학전공</option>
+                        <option value="10">실내건축학전공</option>
+                        <option value="11">도시공학과</option>
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="right_btn_area"></div>
+        </div>
+        <!---가입버튼--->
+        <div class="btn_area">
+            <button type="button" id="join_btn" class="btn_type btn_primary" onclick="join_check();">
+                <span>가입하기</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!--main-->
+<div class="footer"></div>
+
+</body>
+</html>
