@@ -23,67 +23,68 @@ public class MemberController {
     private final EmailService emailService;
     private final PasswordEncoder passwordEncoder;
 
-    @GetMapping("개인정보 동의")
+    @GetMapping("/agree")
     public String agreeInfo(Model model) {
         boolean checked = false;
         model.addAttribute("checked", checked);
-        return "개인정보 동의 페이지";
+        return "/agree";
     }
 
-    @PostMapping("개인정보 동의")
+    @PostMapping("/agree")
     public String agreeInfo(@ModelAttribute boolean checked) {
         if (checked) {
-            return "이메일 인증 페이지";
+            return "/signup";
         } else {
             // alert 처리
-            return "개인정보 동의 페이지";
+            return "/agree";
         }
     }
 
-    @GetMapping("회원가입")
-    public String signInForm(Model model) {
+    @GetMapping("/signup")
+    public String signUpForm(Model model) {
         model.addAttribute("memberFormDto", new MemberFormDto());
-        return "회원가입 페이지";
+        return "/signup";
     }
 
-    @PostMapping("회원가입")
-    public String singInForm(@Valid MemberFormDto memberFormDto, BindingResult bindingResult, @RequestParam String action, Model model) throws Exception {
+    @PostMapping("/signup")
+    public String singUpForm(@Valid MemberFormDto memberFormDto, BindingResult bindingResult, @RequestParam String action, Model model) throws Exception {
         String certification = "";
 
-        if (action.equals("인증번호 발송")) {
+        if (action.equals("mailButton")) {
             certification = emailService.sendSimpleMessage(memberFormDto.getEmail());
-        } else if (action.equals("인증번호 확인")) {
+        } else if (action.equals("certificationButton")) {
             if (certification.isEmpty()) {
                 // 인증번호 발송 버튼을 누르지 않고 인증번호 확인 버튼을 누른 경우
+                // 필요없음
                 model.addAttribute("errorMessage", "인증번호 발송 버튼을 눌러주세요.");
-                return "회원가입 페이지";
+                return "/signup";
             } else {
                 if (certification.equals(memberFormDto.getCertification())) {
                     // 생성된 인증번호와 입력받은 인증번호가 일치하는 경우
                     // ?
                 } else {
                     model.addAttribute("errorMessage", "인증번호가 일치하지 않습니다.");
-                    return "회원가입 페이지";
+                    return "/signup";
                 }
             }
-        } else if (action.equals("중복 확인")) {
+        } else if (action.equals("nicknameButton")) {
             try {
                 memberService.validateDuplicateNickname(memberFormDto.getNickname());
 
             } catch (IllegalStateException e) {
                 model.addAttribute("errorMessage", e.getMessage());
-                return "회원가입 페이지";
+                return "/signup";
             }
         }
 
         if (bindingResult.hasErrors()) {
-            return "회원가입 페이지";
+            return "/signup";
         }
 
         // 비밀번호 확인 일치 X
         if (!memberFormDto.getPassword().equals(memberFormDto.getPasswordCheck())) {
             bindingResult.rejectValue("passwordCheck", "PasswordIncorrect", "패스워드가 일치하지 않습니다.");
-            return "회원가입 페이지";
+            return "/signup";
         }
 
         try {
@@ -91,7 +92,7 @@ public class MemberController {
             memberService.saveMember(member);
         } catch (IllegalStateException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            return "회원가입 페이지";
+            return "/signup";
         }
 
         return "redirect:/";
