@@ -53,12 +53,7 @@ public class MemberController {
         if (action.equals("mailButton")) {
             certification = emailService.sendSimpleMessage(memberFormDto.getEmail());
         } else if (action.equals("certificationButton")) {
-            if (certification.isEmpty()) {
-                // 인증번호 발송 버튼을 누르지 않고 인증번호 확인 버튼을 누른 경우
-                // 필요없음
-                model.addAttribute("errorMessage", "인증번호 발송 버튼을 눌러주세요.");
-                return "/signup";
-            } else {
+
                 if (certification.equals(memberFormDto.getCertification())) {
                     // 생성된 인증번호와 입력받은 인증번호가 일치하는 경우
                     // ?
@@ -66,7 +61,6 @@ public class MemberController {
                     model.addAttribute("errorMessage", "인증번호가 일치하지 않습니다.");
                     return "/signup";
                 }
-            }
         } else if (action.equals("nicknameButton")) {
             try {
                 memberService.validateDuplicateNickname(memberFormDto.getNickname());

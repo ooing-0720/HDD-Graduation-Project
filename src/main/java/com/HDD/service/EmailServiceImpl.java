@@ -1,24 +1,26 @@
 package com.HDD.service;
 
 import com.HDD.member.Member;
-import com.HDD.repository.MemberRepository;
+//import com.HDD.repository.MemberRepository;
+import com.HDD.repository.MemoryMemberRepository;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+//import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.Random;
 
 @Service
-@Transactional
+//@Transactional
 @RequiredArgsConstructor
 public class EmailServiceImpl implements EmailService{
 
     private final JavaMailSender mailSender;
-    private final MemberRepository memberRepository;
+    private final MemoryMemberRepository memberRepository;
 
     public static final String ePw = createKey();
 
@@ -88,7 +90,7 @@ public class EmailServiceImpl implements EmailService{
     }
 
     private void validateDuplicateEmail(String email) {
-        Member findMember = memberRepository.findByEmail(email);
+        Optional<Member> findMember = memberRepository.findByEmail(email);
         if (findMember != null) {
             throw new IllegalStateException("이미 가입된 이메일입니다.");
         }
