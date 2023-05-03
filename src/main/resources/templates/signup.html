@@ -1,5 +1,30 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+    <style>
+        .error_next_box {
+            color: #bd2130;
+        }
+    </style>
+</th:block>
+
+<!-- 사용자 스크립트 추가 -->
+<th:block layout:fragment="script">
+
+    <script th:inline="javascript">
+        //회원가입 실패시 에러 메시지 출력
+        $(document).ready(function(){
+            var errorMessage = [[${errorMessage}]];
+            if(errorMessage != null){
+                alert(errorMessage);
+            }
+        });
+    </script>
+
+</th:block>
 <head>
     <meta charset="UTF-8">
     <title>sign up page</title>
@@ -33,7 +58,8 @@
 <!--header-->
 
 <form id="join_form"
-      th:action
+      role="form"
+      action="/signup"
       th:object="${memberFormDto}"
       method="post">
 <!--container-->
@@ -50,7 +76,7 @@
                     <input type="text" th:field="*{sid}" class="int" placeholder="학번을 입력하세요. 예)C123456" pattern="[abcABC]{1}\d{6}">
                 </div>
                 <div class="join_expand_field">
-                    <span class="error_next_box" id="uidMsg"  style="display:none" aria-live="assertive">오류메세지</span>
+                    <span th:if="${#fields.hasErrors('sid')}" th:errors="*{sid}" class="error_next_box" >오류메세지</span>
                 </div>
             </div>
             <div class="right_btn_area">
@@ -67,9 +93,10 @@
             <div class="join_field_wrap">
                 <div class="join_form">
                     <input type="text" th:field="*{password}" class="int"  placeholder="비밀번호를 입력하세요.">
-                    <div class="join_expand_field">
-                        <span class="error_next_box" id="pwdMsg"  style="display:none" aria-live="assertive">오류메세지</span>
-                    </div>
+
+                </div>
+                <div class="join_expand_field">
+                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error_next_box" >오류메세지</span>
                 </div>
             </div>
             <div class="right_btn_area"></div>
@@ -82,9 +109,10 @@
             <div class="join_field_wrap">
                 <div class="join_form">
                     <input type="text" th:field="*{passwordCheck}" class="int" placeholder="비밀번호를 다시 입력하세요.">
-                    <div class="join_expand_field">
-                        <span class="error_next_box" id="repwdMsg"  style="display:none" aria-live="assertive">오류메세지</span>
-                    </div>
+
+                </div>
+                <div class="join_expand_field">
+                    <span th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}" class="error_next_box" >오류메세지</span>
                 </div>
             </div>
             <div class="right_btn_area"></div>
@@ -99,7 +127,7 @@
                     <input type="text" th:field="*{email}" class="int" placeholder="예) abc123@g.hongik.ac.kr">
                 </div>
                 <div class="join_expand_field">
-                    <span class="error_next_box" id="mailMsg"  style="display:none" aria-live="assertive">오류메세지</span>
+                    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error_next_box" >오류메세지</span>
                 </div>
             </div>
             <div class="right_btn_area">
@@ -118,7 +146,7 @@
                     <input type="text" th:field="*{certification}" class="int">
                 </div>
                 <div class="join_expand_field">
-                    <span class="error_next_box" id="mailnumMsg"  style="display:none" aria-live="assertive">오류메세지</span>
+                    <span th:if="${#fields.hasErrors('certification')}" th:errors="*{certification}" class="error_next_box" >오류메세지</span>
                 </div>
             </div>
             <div class="right_btn_area">
@@ -135,13 +163,14 @@
             <div class="join_field_wrap">
                 <div class="join_form">
                     <input type="text" th:field="*{nickname}" class="int" placeholder="닉네임을 입력하세요.">
-                    <div class="join_expand_field">
-                        <span class="error_next_box" id="unameMsg"  style="display:none" aria-live="assertive">오류메세지</span>
-                    </div>
+
+                </div>
+                <div class="join_expand_field">
+                    <span th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}" class="error_next_box" >오류메세지</span>
                 </div>
             </div>
             <div class="right_btn_area">
-                <button type="submit" name="action" value="nicknameButton" onclick="uname_check();" class="btn_verify btn_secondary">
+                <button type="submit" name="action" value="nicknameButton"  class="btn_verify btn_secondary">
                     <span>중복확인</span>
                 </button>
             </div>
@@ -167,6 +196,9 @@
                         <option value="10">실내건축학전공</option>
                         <option value="11">도시공학과</option>
                     </select>
+                </div>
+                <div class="join_expand_field">
+                    <span th:if="${#fields.hasErrors('major')}" th:errors="*{major}" class="error_next_box" >오류메세지</span>
                 </div>
             </div>
 
