@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ㅎㄷㄷ</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/main.css" />
+    <script src="../static/js/main.js"></script>
+</head>
+<body>
+<header>
+    <div class="top_banner">
+        <li>
+            <a href = "main.html">ㅎㄷㄷ</a>
+        </li>
+    </div>
+    <nav class="navbar">
+        <div class="menu">
+            <ul>
+                <li><a href = "main.html">Home</a></li>
+                <li><a href = "map.html">지도</a></li>
+                <li><a href = "promotion.html">홍보</a></li>
+                <li><a href = "#">구인</a>
+                    <ul class="submenu">
+                        <li><a href = "projectrecruit.html">프로젝트 구인</a></li>
+                        <li><a href = "roomrecruit.html">룸메이트 구인</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<div id ="container" class="container">
+    <div class="photo">
+        photo
+    </div>
+    <div class="login">
+        <form>
+            <p class="input">
+                <input type="text" name="userid" class="text" placeholder="아이디">
+            </p>
+            <p class="input">
+                <input type="password" name="password" class="text" placeholder="비밀번호">
+            </p>
+            <p class="submit">
+                <button type="submit" value="로그인" class="submit_login">
+                    <span>로그인</span>
+                </button>
+            <p class="find">
+                <a href="find.html">PW 찾기</a>
+            </p>
+            <p class="register">
+                <a href="signup.html">회원가입</a>
+            </p>
+        </form>
+    </div>
+    <div class="notice">
+        <div class="form-group">
+            <h2>공지사항</h2>
+            <select id ="dept1" name="dept1" onchange="deptChange(this)">
+                <option value="학생공지">학생공지</option>
+                <option value="공과대학">공과대학</option>
+                <option value="건축도시대학">건축도시대학</option>
+                <option value="경영대학">경영대학</option>
+                <option value="문과대학">문과대학</option>
+                <option value="법과대학">법과대학</option>
+                <option value="사범대학">사범대학</option>
+                <option value="미술대학">미술대학</option>
+                <option value="경제학부">경제학부</option>
+                <option value="공연예술학부">공연예술학부</option>
+                <option value="디자인경영융합">디자인경영융합</option>
+                <option value="자율전공">자율전공</option>
+            </select>
+        </div>
+        <div class="form-group2">
+            <select id="dept2" name="dept2">
+                <option>- - - - - - - - - - - - - - </option>
+            </select>
+        </div>
+        <hr/>
+        <div class="article_n">
+            <li>
+                <a href="https://www.hongik.ac.kr/contents/www/cor/studentsno.html">
+                    2023학년도 하계계절학기 학점교류 신청 안내(건국대학교)
+                </a>
+            </li>
+            <li>
+                <a href="https://www.hongik.ac.kr/contents/www/cor/studentsno.html">
+                    2023학년도 하계계절학기 학점교류 신청 안내(서울시립대학교)
+                </a>
+            </li>
+            <li>
+                <a  href="https://www.hongik.ac.kr/contents/www/cor/studentsno.html">
+                    2023학년도 하계계절학기 학점교류 신청 안내(숙명여자대학교)
+                </a>
+            </li>
+            <li>
+                <a href="https://www.hongik.ac.kr/contents/www/cor/studentsno.html">
+                    [서울장학재단] 2023년 독립유공자 후손 장학금 장학생 선발 공고 안내
+                </a>
+            </li>
+            <li>
+                <a href="https://www.hongik.ac.kr/contents/www/cor/studentsno.html">
+                    [훈련생 모집] K-Digital Training 무료 취업 연계 교육 훈련생 모집
+                </a>
+            </li>
+        </div>
+    </div>
+    <div class="card">
+        <h2>최근 게시물</h2>
+        <hr/>
+        <li>
+            <a class="article" href="projectrecruit.html">
+                <span class="top">구인</span> <span class="down">프로젝트</span>
+            </a>
+            <a class="detail" href="projectrecruit.html">
+                <p class="title">컴퓨터공학과 / 3명 / 4학년</p>
+            </a>
+        </li>
+        <li>
+            <a class="article" href="roomrecruit.html">
+                <span class="top">구인</span> <span class="down">룸메이트</span>
+            </a>
+            <a class="detail" href="roomrecruit.html">
+                <p class="title">여 / 1학년 / 2기숙사</p>
+            </a>
+        </li>
+        <li>
+            <a class="article" href="map.html">
+                <span class="top">지도</span> <span class="down">맛집</span>
+            </a>
+            <a class="detail" href="map.html">
+                <p class="title">상호명 / 여기 진짜 맛있어요!</p>
+            </a>
+        </li>
+        <li>
+            <a class="article" href="promotion.html">
+                <span class="top">홍보</span>
+            </a>
+            <a class="detail" href="map.html">
+                <p class="title">컴퓨터공학과 / 졸업전시회</p>
+            </a>
+        </li>
+    </div>
+    <div class="icon">
+        <ul>
+            <h2>바로가기</h2>
+            <hr/>
+            <li><a href="https://www.hongik.ac.kr">홍익대학교</a></li>
+            <li><a href="https://cn.hongik.ac.kr/stud/">클래스넷</a></li>
+            <li><a href="https://at.hongik.ac.kr/stud01.jsp">전자출결</a></li>
+            <li><a href="http://dormitory.hongik.ac.kr/">기숙사</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
